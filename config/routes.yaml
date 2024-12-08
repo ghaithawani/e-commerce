@@ -1,0 +1,5 @@
+# config/routes.yaml
+app_commande_show:
+  path: '/commande/{idCommande}'
+  controller: 'App\Controller\CommandeController::show'
+  methods: ['GET']

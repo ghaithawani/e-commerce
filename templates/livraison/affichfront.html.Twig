@@ -1,0 +1,69 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Livraison index{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Livraison</h1>
+    <li class="nav-item d-flex align-items-center">
+        <div class="input-group search-area">
+            <input type="text" class="form-control" id="searchInput" placeholder="Rechercher ...">
+            <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+        </div>
+    </li>
+    <div class="col-md-6">
+            <a class="btn btn-outline-danger float-end" href="{{ path('app_trie_livraison') }}">Trier par livraison</a>
+        </div>
+    <div class="row" id="livraison-cards">
+        {% for livraison in livraisons %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">ID Livraison: {{ livraison.idlivraison }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Destinataire: {{ livraison.destinataire }}</h5>
+                        <p class="card-text">Adresse: {{ livraison.adresse }}</p>
+                        <p class="card-text">Date de Livraison: {{ livraison.dateLivraison ? livraison.dateLivraison.format('Y-m-d') : 'N/A' }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_livraison_showfront', {'idlivraison': livraison.idlivraison}) }}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Show Details</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    No records found
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+<script>
+    function filterCards() {
+        const filter = document.getElementById('searchInput').value.toUpperCase();
+        const cards = document.querySelectorAll('#livraison-cards .card');
+        cards.forEach(card => {
+            const text = card.textContent || card.innerText;
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', filterCards);
+    function trierParEvenement() {
+    fetch('/trielivraison')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.error('Erreur :', error));
+}
+</script>
+
+{% endblock %}

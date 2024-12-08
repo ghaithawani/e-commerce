@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container mt-4">
+    <!-- Reclamation Details -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Reclamation Details</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Name:</dt>
+                        <dd class="col-sm-9">{{ reclamation.name }}</dd>
+
+                        <dt class="col-sm-3">Last Name:</dt>
+                        <dd class="col-sm-9">{{ reclamation.lastname }}</dd>
+
+                        <dt class="col-sm-3">Description:</dt>
+                        <dd class="col-sm-9">{{ reclamation.descrirec }}</dd>
+
+                        <dt class="col-sm-3">Date:</dt>
+                        <dd class="col-sm-9">{{ reclamation.daterec|date('Y-m-d') }}</dd>
+
+                        <dt class="col-sm-3">Category:</dt>
+                        <dd class="col-sm-9">{{ reclamation.categorierec }}</dd>
+
+                        <dt class="col-sm-3">Status:</dt>
+                        <dd class="col-sm-9">
+                            {% if reclamation.statutrec == 'traitee' %}
+                                <span class="badge bg-success">Traitee</span>
+                            {% else %}
+                                <span class="badge bg-warning">Non Traitee</span>
+                            {% endif %}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Add Response -->
+    {% if reclamation.responses|length == 0 %}
+     <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Add a Response</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'responseForm'}}) }}
+                    {{ form_widget(form._token, {'attr': {'style': 'display:none;'}}) }}
+                    {% for field in form %}
+                        {% if field.vars.name != '_token' %}
+                            <div class="form-group">
+                                {{ form_label(field) }}
+                                {{ form_widget(field, {'attr': {'class': 'form-control', 'id': field.vars.id}}) }}
+                                <div id="{{ field.vars.id }}_error" class="text-danger"></div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Submit Response</button>
+                {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Responses -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Response</h3>
+                </div>
+                <div class="card-body">
+                    {% if reclamation.responses|length > 0 %}
+                    <ul class="list-unstyled">
+                        {% for response in reclamation.responses %}
+                        <li class="mb-2">
+                            <strong>{{ response.daterep|date('Y-m-d') }}:</strong> {{ response.contenurep }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No response yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</div>
+
+ <script>
+    document.getElementById('responseForm').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        {% for field in form %}
+        {% if field.vars.name != '_token' %}
+        const inputField = document.getElementById('{{ field.vars.id }}');
+        const errorDiv = document.getElementById('{{ field.vars.id }}_error');
+        if (!inputField.value.trim()) {
+            errorDiv.textContent = 'This field cannot be empty.';
+            isValid = false;
+        } else {
+            errorDiv.textContent = ''; // Clear previous error message
+        }
+        {% endif %}
+        {% endfor %}
+
+        if (!isValid) {
+            event.preventDefault(); // Stop form submission
+        }
+    });
+    </script>
+{% endblock %}

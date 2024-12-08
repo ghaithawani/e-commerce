@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Produit{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4">
+                <h1 class="text-center mb-4">Détails du Produit</h1>
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ produit.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ produit.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{ produit.prix }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ produit.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Catégorie</th>
+                            <td>{{ produit.categorie }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date d'ajout</th>
+                            <td>{{ produit.dateajout ? produit.dateajout|date('Y-m-d') : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <a href="{{ path('app_produits_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+
+                    <a href="{{ path('app_produits_edit', {'id': produit.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </div>
+                {{ include('produits/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

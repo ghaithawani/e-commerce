@@ -1,0 +1,72 @@
+{% extends 'basefront.html.twig' %}
+
+
+
+{% block title %}Create New Reclamation{% endblock %}
+
+{% block body %}
+ 
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create New Reclamation</h4>
+                        {{ form_start(form, {'attr': {'class': 'forms-sample', 'id': 'reclamationForm'}}) }}
+
+                        {# Form fields with error placeholders #}
+                        <div class="form-group">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            <div id="name_error" class="text-danger"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form_label(form.lastname) }}
+                            {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                            <div id="lastname_error" class="text-danger"></div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.descrirec) }}
+                            {{ form_widget(form.descrirec, {'attr': {'class': 'form-control'}}) }}
+                            <div id="descrirec_error" class="text-danger"></div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.categorierec) }}
+                            {{ form_widget(form.categorierec, {'attr': {'class': 'form-control'}}) }}
+                            <div id="categorierec_error" class="text-danger"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mr-2">Create</button>
+                        
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reclamationForm').addEventListener('submit', function(event) {
+            let isValid = true;
+
+            const fields = ['name', 'lastname', 'descrirec', 'categorierec'];
+            fields.forEach(field => {
+                const input = document.querySelector('[id^="{{ form.vars.id }}_' + field + '"]');
+                const errorDiv = document.getElementById(field + '_error');
+                if (!input || !input.value.trim()) {
+                    errorDiv.textContent = field.charAt(0).toUpperCase() + field.slice(1) + ' cannot be empty.';
+                    isValid = false;
+                } else {
+                    errorDiv.textContent = ''; // Clear previous error message
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault(); // Stop form submission
+            }
+        });
+    </script>
+{% endblock %}

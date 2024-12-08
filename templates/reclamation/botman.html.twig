@@ -1,0 +1,17 @@
+{% extends 'basefront.html.twig' %}
+
+{% block content %}
+    <div>
+        {% for message in messages %}
+            {% if message.fromBot %}
+                <div class="bot-message">{{ message.text }}</div>
+            {% else %}
+                <div class="user-message">{{ message.text }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <form action="{{ path('botman_handle') }}" method="post">
+        <input type="text" name="message" id="message" placeholder="Type your message here..." autocomplete="off">
+        <button type="submit">Send</button>
+    </form>
+{% endblock %}

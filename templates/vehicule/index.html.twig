@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule Index{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Vehicule Index</h1>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id Vehicule</th>
+                        <th>Marque</th>
+                        <th>Modele</th>
+                        <th>Annee</th>
+                        <th>Couleur</th>
+                        <th>Immatriculation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for vehicule in vehicules %}
+                    <tr>
+                        <td>{{ vehicule.idvehicule }}</td>
+                        <td>{{ vehicule.marque }}</td>
+                        <td>{{ vehicule.modele }}</td>
+                        <td>{{ vehicule.annee }}</td>
+                        <td>{{ vehicule.couleur }}</td>
+                        <td>{{ vehicule.immatriculation }}</td>
+                        <td>
+                            <a href="{{ path('app_vehicule_show', {'idvehicule': vehicule.idvehicule}) }}" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i> Show
+                            </a>
+                            <a href="{{ path('app_vehicule_edit', {'idvehicule': vehicule.idvehicule}) }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ path('app_vehicule_new') }}" class="btn btn-success">
+            <i class="fas fa-plus"></i> Create New
+        </a>
+    </div>
+{% endblock %}

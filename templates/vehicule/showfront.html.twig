@@ -1,0 +1,47 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Vehicule Details{% endblock %}
+
+{% block body %}
+ <a href="{{ path('app_vehicule_affichfront') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> 
+                    </a>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Vehicule Details</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-car"></i> Vehicle Details</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>ID Vehicule:</strong> {{ vehicule.idvehicule }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Marque:</strong> {{ vehicule.marque }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Modele:</strong> {{ vehicule.modele }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Annee:</strong> {{ vehicule.annee }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Couleur:</strong> {{ vehicule.couleur }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Immatriculation:</strong> {{ vehicule.immatriculation }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-muted text-center">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

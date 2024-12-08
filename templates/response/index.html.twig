@@ -1,0 +1,71 @@
+{# templates/response/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Responses{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Responses</h4>
+
+                    <!-- Optionally add a New Response button -->
+               
+                    <!-- Search Form -->
+                    <div class="mb-3">
+                        <form action="{{ path('response_index') }}" method="get" class="search-form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search responses" name="search" value="{{ search }}">
+                                <div class="input-group-append ms-2">
+                                    <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Response Table -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Content</th>
+                                    <th>Réclamation</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for response in pagination %}
+                                <tr>
+                                    <td>{{ response.daterep|date('Y-m-d H:i:s') }}</td>
+                                    <td>{{ response.contenurep }}</td>
+                                    <td><a href="{{ path('reclamation_view', {'idrec': response.reclamation.idrec}) }}" class="btn btn-success btn-sm">Réclamation</a></td>
+                                
+                                    <td>
+                                        <!-- Update these paths according to your actual routing -->
+                                        <a href="{{ path('response_edit', {'idrep': response.idrep}) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ path('response_delete', {'idrep': response.idrep}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center">No responses found.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="float-end mt-3"
+                    >
+                        {# {{ knp_pagination_render(pagination, 'bundles/KnpPaginatorBundle/custom_pagination.html.twig') }} #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

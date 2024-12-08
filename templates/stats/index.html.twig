@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="d-flex align-items-center justify-content-between">
+        <!-- Statistic Item -->
+        <div class="p-3 bg-primary text-white rounded">
+          <p class="statistics-title">Total Reclamations</p>
+          <h3 class="rate-percentage">{{ totalReclamationsCount }}</h3>
+        </div>
+        
+    
+        
+        <!-- Statistic Item -->
+        <div class="p-3 bg-info text-white rounded">
+          <p class="statistics-title">Traitee Reclamations</p>
+          <h3 class="rate-percentage">{{ totalTraiteeReclamationsCount }}</h3>
+        </div>
+        
+        <!-- Statistic Item -->
+        <div class="p-3 bg-warning text-dark rounded">
+          <p class="statistics-title">Non Traitee Reclamations</p>
+          <h3 class="rate-percentage">{{ totalNonTraiteeReclamationsCount }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-4">
+  <div class="card-body">
+    <h4 class="card-title">Reclamations by Month</h4>
+    <canvas id="reclamationsChart"></canvas>
+  </div>
+</div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  var ctx = document.getElementById('reclamationsChart').getContext('2d');
+  var reclamationsData = {{ reclamationsForTenLastMonths|json_encode|raw }};
+
+  var labels = Object.keys(reclamationsData);
+  var data = Object.values(reclamationsData);
+
+  var reclamationsChart = new Chart(ctx, {
+    type: 'bar', // or 'line', depending on your preference
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Number of Reclamations',
+        data: data,
+        backgroundColor: 'rgba(0, 123, 255, 0.5)',
+        borderColor: 'rgba(0, 123, 255, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+
+
+{% endblock %}

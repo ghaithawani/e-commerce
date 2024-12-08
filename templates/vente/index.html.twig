@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-10"> {# Increase the width of the column #}
+            <div class="text-center">
+                <h1>Liste des ventes</h1>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped" style="font-size: 250%;"> {# Increase font size #}
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Quantité vendue</th>
+                            <th>Date de vente</th>
+                            <th>Montant total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for vente in ventes %}
+                        <tr>
+                            <td>{{ vente.id }}</td>
+                            <td>{{ vente.quantitevendu }}</td>
+                            <td>{{ vente.datevente ? vente.datevente|date('Y-m-d') : '' }}</td>
+                            <td>{{ vente.montanttotal }}</td>
+                            <td>
+                                <a href="{{ path('app_vente_delete', {'id': vente.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vente ?')"><i class="fas fa-trash-alt text-danger"></i></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucun enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {# Pagination #}
+            <div class="text-center">
+                {{ knp_pagination_render(ventes) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Commande Index{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Commandes</h1>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchInput" placeholder="Rechercher ...">
+                <span class="input-group-text">
+                    <i class="flaticon-381-search-2"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-outline-danger float-end" href="{{ path('app_trie_commande') }}">Trier par commande</a>
+        </div>
+    </div>
+    
+    <div class="row" id="commande-cards">
+        {% for commande in commandes %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-receipt mr-2"></i>Id Commande: {{ commande.idCommande }}</h5>
+                        <p class="card-text"><i class="far fa-calendar-alt mr-2"></i>Date Commande: {{ commande.datecommande ? commande.datecommande|date('Y-m-d') : '' }}</p>
+                        <p class="card-text"><i class="fas fa-align-left mr-2"></i>Description: {{ commande.description }}</p>
+                        <p class="card-text"><i class="fas fa-dollar-sign mr-2"></i>Montant Total: {{ commande.montanttotal }}</p>
+                        <a href="{{ path('app_commande_showf', {'idCommande': commande.idCommande}) }}" class="btn btn-info btn-sm"><i class="fas fa-eye mr-1"></i> Détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Aucun enregistrement trouvé
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function filterCards() {
+        const filter = document.getElementById('searchInput').value.toUpperCase();
+        const cards = document.querySelectorAll('#commande-cards .card');
+        cards.forEach(card => {
+            const text = card.textContent || card.innerText;
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', filterCards);
+    function trierParEvenement() {
+    fetch('/triecommande')
+        .then(response => response.json())
+        .then(data => {
+           
+            console.log(data);
+        })
+        .catch(error => console.error('Erreur :', error));
+}
+</script>
+
+{% endblock %}

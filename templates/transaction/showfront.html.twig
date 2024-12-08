@@ -1,0 +1,42 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Transaction Details{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <a href="{{ path('app_transaction_affichfront') }}" class="btn btn-secondary mb-4">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fas fa-exchange-alt"></i> Transaction Details</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Transaction ID:</strong> {{ transaction.transactionid }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Sender:</strong> {{ transaction.sender }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Receiver:</strong> {{ transaction.receiver }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Amount:</strong> {{ transaction.amount }}
+                        </li>
+                    </ul>
+                     <tr>
+                    <th class="bg-dark text-white">Qrcode</th>
+<td><img src="{{ asset('/qrcodes/' ~ transaction.qrcode) }}"></td>
+                </tr>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

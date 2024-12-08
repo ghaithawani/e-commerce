@@ -1,0 +1,32 @@
+
+{% extends 'basefront.html.twig' %}
+{% block body %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-3">
+
+<h1>Ajouter une vente</h1>
+
+       {{ form_start(form) }}
+    {{ form_row(form.quantitevendu, {'attr': {'class': 'form-control', 'style': 'width: 500;'}}) }}
+
+{{ form_row(form.datevente, {'attr': {'class': 'form-control datepicker', 'style': 'width: 500px;'}}) }}
+
+{{ form_row(form.idProduit, {'attr': {'class': 'form-control selectpicker', 'style': 'width: 500px;'}}) }}
+
+{{ form_row(form.montanttotal, {'attr': {'class': 'form-control', 'style': 'width: 500px;'}}) }}
+
+<button type="submit" class="btn btn-primary">Ajouter</button>
+
+    {{ form_end(form) }}
+ </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+
+{% extends 'basefront.html.twig' %}
+
+{% block body %}
+
+
+<div class="container">
+    <h1 class="text-center">Modifier Vente</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'needs-validation'}}) }}
+
+            <div class="mb-3">
+                {{ form_label(form.quantitevendu, 'Quantité Vendue', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.quantitevendu, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.quantitevendu) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.datevente, 'Date de Vente', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.datevente, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.datevente) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.montanttotal, 'Montant Total', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.montanttotal, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.montanttotal) }}
+            </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-pencil"></i></button>
+            </div>
+             
+              <div class="text-center">
+                <a href="{{ path('app_vente_new') }}"><i class="fas fa-plus-circle text-success"></i> Créer une nouvelle vente</a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{# templates/reclamation/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Reclamations{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Reclamations</h4>
+                    <p class="card-description">
+                        <a href="{{ path('reclamation_new') }}" class="btn btn-primary btn-sm">Create a new Reclamation</a>
+                    </p>
+
+                    <!-- Search Form -->
+                    <div class="mb-3">
+                        <form action="{{ path('reclamation_index') }}" method="get" class="search-form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search reclamations" name="search" value="{{ search }}">
+                                <div class="input-group-append ms-2">
+                                    <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Reclamation Table -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Last Name</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for reclamation in pagination  %}
+                                <tr>
+                                    <td>{{ reclamation.name }}</td>
+                                    <td>{{ reclamation.lastname }}</td>
+                                    <td>{{ reclamation.descrirec }}</td>
+                                    <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                                    <td>{{ reclamation.categorierec }}</td>
+                                    <td>
+                                        {% if reclamation.statutrec == 'traitee' %}
+                                            <span class="badge bg-success">Traitee</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Non Traitee</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('reclamation_show', {'idrec': reclamation.idrec}) }}" class="btn btn-info btn-sm">Show</a>
+                                        <a href="{{ path('reclamation_edit', {'idrec': reclamation.idrec}) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ path('reclamation_delete', {'idrec': reclamation.idrec}) }}" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{{ path('reclamation_view', {'idrec': reclamation.idrec}) }}" class="btn btn-success btn-sm">Response</a>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7" class="text-center">No reclamations found.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="float-end mt-3"
+                    >
+                        {# {{ knp_pagination_render(pagination, 'bundles/KnpPaginatorBundle/custom_pagination.html.twig') }} #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

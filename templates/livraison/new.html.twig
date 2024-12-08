@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Livraison{% endblock %}
+
+{% block body %}
+                        <a href="{{ path('app_livraison_index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i></a>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Create New Livraison</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+
+                        <h5 class="mb-0">Livraison Details</h5>
+                    </div>
+                    <div class="card-body">
+                        {{ include('livraison/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

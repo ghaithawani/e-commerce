@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transaction{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_transaction_index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to List
+    </a>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Transaction Details</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="w-25">Transaction ID</th>
+                            <td>{{ transaction.transactionid }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sender</th>
+                            <td>{{ transaction.sender }}</td>
+                        </tr>
+                        <tr>
+                            <th>Receiver</th>
+                            <td>{{ transaction.receiver }}</td>
+                        </tr>
+                        <tr>
+                            <th>Amount</th>
+                            <td>{{ transaction.amount }}</td>
+                        </tr>   
+                
+            </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-end">
+            <a href="{{ path('app_transaction_edit', {'transactionid': transaction.transactionid}) }}" class="btn btn-primary mr-2">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+
+            {{ include('transaction/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

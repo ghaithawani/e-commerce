@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste des produits {% endblock %}
+
+{% block body %}
+
+      <!-- partial -->
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <!-- Your content goes here -->
+        </div>
+        
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">liste des produits</h1>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Description</th>
+                        <th>Categorie</th>
+                        <th>Dateajout</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.id }}</td>
+                        <td>{{ produit.nom }}</td>
+                        <td>{{ produit.prix }}</td>
+                        <td>{{ produit.description }}</td>
+                        <td>{{ produit.categorie }}</td>
+                        <td>{{ produit.dateajout ? produit.dateajout|date('Y-m-d') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_produits_show', {'id': produit.id}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+                            <a href="{{ path('app_produits_edit', {'id': produit.id}) }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            {{ include('produits/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7">Aucun enregistrement trouvé</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="{{ path('app_produits_new') }}" class="btn btn-success"><i class="fas fa-plus-circle"></i> Ajouter un nouveau produit</a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+    {{ knp_pagination_render(produits) }}
+</div>
+
+</div>
+
+
+
+
+{% endblock %}

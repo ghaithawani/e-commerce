@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livraison Details{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-5 text-primary">Livraison Details</h1>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <a href="{{ path('app_livraison_index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 30%;">ID Livraison</th>
+                                    <td>{{ livraison.idlivraison }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Adresse</th>
+                                    <td>{{ livraison.adresse }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Destinataire</th>
+                                    <td>{{ livraison.destinataire }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date de Livraison</th>
+                                    <td>{{ livraison.dateLivraison ? livraison.dateLivraison|date('Y-m-d') : 'N/A' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer bg-light border-top-0 d-flex justify-content-between">
+                        <a href="{{ path('app_livraison_edit', {'idlivraison': livraison.idlivraison}) }}" class="btn btn-primary mr-2"><i class="bi bi-pencil"></i> Edit</a>
+                       
+                        {{ include('livraison/_delete_form.html.twig', {'button_label': 'Delete', 'class': 'btn btn-danger ml-2', 'id': 'delete-form'}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

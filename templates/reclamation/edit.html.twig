@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Edit Reclamation{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Edit Reclamation</h4>
+                    {{ form_start(form, {'attr': {'class': 'forms-sample', 'id': 'reclamationForm'}}) }}
+                        {% for field in form %}
+                            {% if field.vars.name != '_token' %}
+                                <div class="form-group">
+                                    {{ form_label(field) }}
+                                    {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                                    <div id="{{ field.vars.id }}_error" class="text-danger"></div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary mr-2">Save Changes</button>
+                        <a href="{{ path('reclamation_index') }}" class="btn btn-light">Back to list</a>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('reclamationForm').addEventListener('submit', function(event) {
+    let isValid = true;
+
+    {% for field in form %}
+    const {{ field.vars.name }} = document.getElementById('{{ field.vars.id }}');
+    const {{ field.vars.name }}Error = document.getElementById('{{ field.vars.id }}_error');
+    if (!{{ field.vars.name }}.value.trim()) {
+        {{ field.vars.name }}Error.textContent = '{{ field.vars.label|capitalize }} cannot be empty.';
+        isValid = false;
+    } else {
+        {{ field.vars.name }}Error.textContent = ''; // Clear previous error message
+    }
+    {% endfor %}
+
+    if (!isValid) {
+        event.preventDefault(); // Stop form submission
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Livraison Details{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_livraison_affichfront') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to List
+    </a>
+    <div class="container mt-5">
+    
+        <h1 class="text-center mb-5 text-primary">Livraison Details</h1>
+ 
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>ID Livraison:</strong> {{ livraison.idlivraison }}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Adresse:</strong> {{ livraison.adresse }}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Destinataire:</strong> {{ livraison.destinataire }}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Date de Livraison:</strong> {{ livraison.dateLivraison ? livraison.dateLivraison|date('Y-m-d') : 'N/A' }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

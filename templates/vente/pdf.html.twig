@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Facture de vente</title>
+    <style>
+        /* Styles CSS pour le PDF */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+        td:first-child {
+            font-weight: bold;
+        }
+        td:last-child {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Facture de vente</h1>
+        <table>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité vendue</th>
+                <th>Montant total</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td>{{ vente.idProduit.nom }}</td>
+                <td>{{ vente.quantiteVendu }}</td>
+                <td>{{ vente.montanttotal }}</td>
+                <td>{{ vente.datevente|date('Y-m-d') }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

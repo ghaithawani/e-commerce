@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Reclamation Detail</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>{{ reclamation.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <td>{{ reclamation.lastname }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{ reclamation.descrirec }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>{{ reclamation.daterec ? reclamation.daterec|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Category</th>
+                                    <td>{{ reclamation.categorierec }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>{{ reclamation.statutrec }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{{ path('reclamation_index') }}" class="btn btn-light">Back to list</a>
+                    <a href="{{ path('reclamation_edit', {'idrec': reclamation.idrec}) }}" class="btn btn-warning">Edit</a>
+                    {{ include('reclamation/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
