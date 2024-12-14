@@ -58,9 +58,9 @@ private $destinataire;
 
 
     /**
-     * @var \DateTime|null
+     * @var string|null
      *
-     * @ORM\Column(name="date_livraison", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="datetime", length=255)
      */
     private $dateLivraison = null;
 

@@ -30,25 +30,21 @@ class CommandeController extends AbstractController
 public function trierCommandeParEvenement(EntityManagerInterface $entityManager, Request $request): Response
 {
     if ($request->isXmlHttpRequest()) {
-        // Récupérer les paramètres de tri depuis la requête AJAX
         $tri = $request->query->get('tri');
 
-        // Votre logique de tri des commandes en fonction des paramètres reçus
-        if ($tri === 'ASC') { // Changer ASC à DESC pour trier de façon descendante
+        if ($tri === 'ASC') { 
             $commandes = $entityManager
                 ->getRepository(Commande::class)
-                ->findBy([], ['idCommande' => 'DESC']); // Changer DESC à ASC pour trier de façon descendante
+                ->findBy([], ['idCommande' => 'DESC']); 
         } else {
             $commandes = $entityManager
                 ->getRepository(Commande::class)
                 ->findBy([], ['idCommande' => 'ASC']);
         }
 
-        // Convertir les données triées en JSON et les renvoyer
         return $this->json($commandes);
     }
 
-    // Si ce n'est pas une requête AJAX, renvoyer la page HTML normale
     $commandes = $entityManager
         ->getRepository(Commande::class)
         ->findBy([], ['idCommande' => 'DESC']);

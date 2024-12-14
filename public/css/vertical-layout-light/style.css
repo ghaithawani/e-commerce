@@ -30593,3 +30593,43 @@ div.tagsinput span.tag a {
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1d1b16;
+}
+
+.register-box {
+  background-color: #3a322a;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+
+.register-box h1 {
+  color: #ffc107;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  background-color: #1d1b16;
+  color: white;
+  border: none;
+  border-bottom: 2px solid #ffc107;
+  border-radius: 0;
+}
+
+.btn {
+  background-color: #ffc107;
+  color: #1d1b16;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 4px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -61,7 +61,7 @@ class Transaction
     /**
      * @var float|null
      *
-     * @ORM\Column(name="amount", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="amount", type="float", precision=10, scale=0, nullable=true)
      */
     private $amount = NULL;
 
@@ -116,10 +116,10 @@ class Transaction
         return $this;
     }
 
-   public function getIdcommande(): ?commande
-{
-    return $this->idcommande ;
-}
+    public function getIdcommande(): ?Commande
+    {
+        return $this->idcommande ;
+    }
 
     public function setIdcommande(?Commande $idcommande): static
     {

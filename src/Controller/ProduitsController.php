@@ -21,10 +21,8 @@ class ProduitsController extends AbstractController
     #[Route('/', name: 'app_produits_index', methods: ['GET'])]
     public function index(ProduitsRepository $produitsRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        // Fetch products from the repository
         $produitsQuery = $produitsRepository->findAll();
     
-        // Paginate the products query
         $produits = $paginator->paginate(
             $produitsQuery, // Query to paginate
             $request->query->getInt('page', 1), // Current page number, default is 1

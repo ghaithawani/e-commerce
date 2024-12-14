@@ -21,8 +21,6 @@ class StatsController extends AbstractController
         $totalNonTraiteeReClamationsCount = $reclamationRepository->countReclamationsByStatus('non traitee');
         $reclamationsForTenLastMonths = $reclamationRepository->countReclamationsByMonth();
 
-        //dump all the data
-        // dd($totalReclamationsCount, $totalResponsesCount, $totalTraiteeReClamationsCount, $totalNonTraiteeReClamationsCount, $reclamationsForTenLastMonths);
         return $this->render('stats/index.html.twig', [
             'totalReclamationsCount' => $totalReclamationsCount,
             'totalResponsesCount' => $totalResponsesCount,

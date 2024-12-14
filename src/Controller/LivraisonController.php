@@ -82,11 +82,9 @@ class LivraisonController extends AbstractController
 public function trierCommandeParEvenement(EntityManagerInterface $entityManager, Request $request): Response
 {
     if ($request->isXmlHttpRequest()) {
-        // Récupérer les paramètres de tri depuis la requête AJAX
         $tri = $request->query->get('tri');
 
-        // Votre logique de tri des commandes en fonction des paramètres reçus
-        if ($tri === 'ASC') { // Changer ASC à DESC pour trier de façon descendante
+        if ($tri === 'ASC') { 
             $livraisons = $entityManager
                 ->getRepository(Livraison::class)
                 ->findBy([], ['idlivraison' => 'DESC']); // Changer DESC à ASC pour trier de façon descendante
